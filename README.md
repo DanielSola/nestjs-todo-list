@@ -49,7 +49,31 @@ Body:
 }
 ```
 
+```bash
+# Update a task
+POST /tasks/update/:id
+Body: 
 
+{
+  name: string,
+  dueDate: string,
+  priority: string (HIGH|MEDIUM|LOW)
+
+}
+```
+
+
+```bash
+# Get tasks
+GET /tasks/?status=(PENDING|OVERDUE) (optional)
+
+```
+
+```bash
+# Delete a task
+DELETE /tasks/:id
+
+```
 
 ## Test
 
