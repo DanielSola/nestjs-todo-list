@@ -9,7 +9,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { TasksService } from './tasks.service';
+import { TasksService } from './services/tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './tasks.model';
 import { Task } from './task.entity';

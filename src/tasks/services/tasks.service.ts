@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import * as uuid from 'uuid';
 import * as dayjs from 'dayjs';
-import { CreateTaskDto } from './dto/create-task.dto';
+import { CreateTaskDto } from '../dto/create-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, MoreThan, LessThan } from 'typeorm';
-import { Task } from './task.entity';
-import { TaskStatus } from './tasks.model';
-import { UpdateTaskDto } from './dto/update-task.dto';
+import { Task } from '../task.entity';
+import { TaskStatus } from '../tasks.model';
+import { UpdateTaskDto } from '../dto/update-task.dto';
 
 @Injectable()
 export class TasksService {
