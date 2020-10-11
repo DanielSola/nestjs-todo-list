@@ -10,8 +10,10 @@ export class TasksService {
   constructor(
     @InjectRepository(Task) private readonly taskRepository: Repository<Task>,
   ) {}
-  getAllTasks() {
-    return 'tasks';
+  async getAllTasks(): Promise<Task[]> {
+    const tasks = await this.taskRepository.find();
+
+    return tasks.map(this.setTaskIsOverDue);
   }
 
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
@@ -19,4 +21,10 @@ export class TasksService {
 
     return await this.taskRepository.save(task);
   }
+
+  private setTaskIsOverDue = (task: Task) => {
+    const isOverDue = new Date(task.dueDate) < new Date();
+
+    return { ...task, isOverDue };
+  };
 }
