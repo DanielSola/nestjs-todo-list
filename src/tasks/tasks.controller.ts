@@ -15,6 +15,7 @@ import { TaskStatus } from './tasks.model';
 import { Task } from './task.entity';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskStatusValidationPipe } from './pipes/task-.status.validation.pipe';
+import { DueDateValidationPipe } from './pipes/due-date.validation.pipe';
 
 @Controller('tasks')
 export class TasksController {
@@ -34,7 +35,9 @@ export class TasksController {
 
   @Post('create')
   @UsePipes(ValidationPipe)
-  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+  createTask(
+    @Body(DueDateValidationPipe) createTaskDto: CreateTaskDto,
+  ): Promise<Task> {
     return this.tasksService.createTask(createTaskDto);
   }
 
