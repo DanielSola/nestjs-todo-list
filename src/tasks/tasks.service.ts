@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { TaskPriority, Task } from './tasks.model';
+import { Task } from './tasks.model';
 import * as uuid from 'uuid';
 import { CreateTaskDto } from './dto/create-task.dto';
 
