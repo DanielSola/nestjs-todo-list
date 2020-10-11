@@ -10,6 +10,16 @@ $ npm install
 
 ## Running the app
 
+Fill .env with your database credentials
+You must first create a table with the name 'Task'.
+Columns: 
+* id: uuid
+* name: character varying
+* due_date: timestamp without timezone
+* priority: string
+* created_at: timestamp without timezone
+* updated_at: timestamp without timezone
+
 ```bash
 # development
 $ npm run start
@@ -19,6 +29,8 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+#@ 
 ```
 
 ## Test
