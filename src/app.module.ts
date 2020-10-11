@@ -2,9 +2,20 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TasksModule } from './tasks/tasks.module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { databaseConfig } from './config/config';
 
 @Module({
-  imports: [TasksModule],
+  imports: [
+    TasksModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+      load: [databaseConfig],
+    }),
+    TypeOrmModule.forRoot(databaseConfig()),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
