@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import * as uuid from 'uuid';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -54,6 +54,16 @@ export class TasksService {
     };
 
     return await this.taskRepository.save(task);
+  }
+
+  async getTaskById(id: string): Promise<Task> {
+    const task = await this.taskRepository.findOne({ id });
+
+    if (!task) {
+      throw new NotFoundException(`Task with ID ${id} not found`);
+    }
+
+    return task;
   }
 
   private setTaskIsOverDue(task: Task) {
