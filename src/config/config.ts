@@ -1,4 +1,5 @@
 import { registerAs } from '@nestjs/config';
+import { Task } from '../tasks/task.entity';
 
 export const databaseConfig = registerAs('database', () => ({
   type: 'postgres' as 'postgres',
@@ -7,7 +8,7 @@ export const databaseConfig = registerAs('database', () => ({
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: [],
+  entities: [Task],
   migrations: [__dirname + '/../database/migration/**/*{.ts,.js}'],
   cli: {
     migrationsDir: 'database/migration',

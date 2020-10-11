@@ -1,26 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { Task } from './tasks.model';
 import * as uuid from 'uuid';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Task } from './task.entity';
 
 @Injectable()
 export class TasksService {
+  constructor(
+    @InjectRepository(Task) private readonly taskRepository: Repository<Task>,
+  ) {}
   getAllTasks() {
     return 'tasks';
   }
 
-  createTask(createTaskDto: CreateTaskDto): Task {
-    const { name, priority, dueDate } = createTaskDto;
-    const parsedDate = new Date(dueDate);
-    const task: Task = {
-      id: uuid.v4(),
-      name,
-      dueDate: parsedDate,
-      priority,
-    };
+  async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
+    const task: Task = { ...createTaskDto, id: uuid.v4() };
 
-    console.log('Task!');
-
-    return task;
+    return await this.taskRepository.save(task);
   }
 }
