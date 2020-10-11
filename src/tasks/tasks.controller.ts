@@ -14,13 +14,16 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './tasks.model';
 import { Task } from './task.entity';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { TaskStatusValidationPipe } from './pipes/task-.status.validation.pipe';
 
 @Controller('tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Get()
-  getAllTasks(@Query('status') status: TaskStatus): Promise<Task[]> {
+  getAllTasks(
+    @Query('status', TaskStatusValidationPipe) status: TaskStatus,
+  ): Promise<Task[]> {
     return this.tasksService.getTasks(status);
   }
 
