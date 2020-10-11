@@ -10,7 +10,7 @@ $ npm install
 
 ## Running the app
 
-Fill .env with your database credentials
+Copy .env.dist to .env and fill with yout database credentials
 You must first create a table with the name 'Task'.
 Columns: 
 * id: uuid
@@ -19,6 +19,8 @@ Columns:
 * priority: string
 * created_at: timestamp without timezone
 * updated_at: timestamp without timezone
+
+# Commands
 
 ```bash
 # development
@@ -32,6 +34,22 @@ $ npm run start:prod
 
 #@ 
 ```
+
+## Endpoints
+```bash
+# Create a task
+POST /tasks/create
+Body: 
+
+{
+  name: string,
+  dueDate: string,
+  priority: string (HIGH|MEDIUM|LOW)
+
+}
+```
+
+
 
 ## Test
 
