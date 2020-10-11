@@ -10,3 +10,8 @@ export enum TaskPriority {
   MEDIUM = 'MEDIUM',
   HIGH = 'HIGH',
 }
+
+export enum TaskStatus {
+  PENDING = 'PENDING',
+  OVERDUE = 'OVERDUE',
+}

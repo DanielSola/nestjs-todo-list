@@ -4,12 +4,28 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, MoreThan, LessThan } from 'typeorm';
 import { Task } from './task.entity';
+import { TaskStatus } from './tasks.model';
 
 @Injectable()
 export class TasksService {
   constructor(
     @InjectRepository(Task) private readonly taskRepository: Repository<Task>,
   ) {}
+
+  async getTasks(status: TaskStatus): Promise<Task[]> {
+    if (!status) {
+      return this.getAllTasks();
+    }
+
+    if (status === TaskStatus.PENDING) {
+      return this.getPendingTasks();
+    }
+
+    if (status === TaskStatus.OVERDUE) {
+      return this.getOverDueTasks();
+    }
+  }
+
   async getAllTasks(): Promise<Task[]> {
     const tasks = await this.taskRepository.find();
 
@@ -29,7 +45,13 @@ export class TasksService {
   }
 
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
-    const task: Task = { ...createTaskDto, id: uuid.v4() };
+    const now = new Date().toISOString();
+    const task: Task = {
+      ...createTaskDto,
+      id: uuid.v4(),
+      createdAt: now,
+      updatedAt: now,
+    };
 
     return await this.taskRepository.save(task);
   }

@@ -14,4 +14,10 @@ export class Task {
 
   @Column()
   priority: TaskPriority;
+
+  @Column({ name: 'created_at' })
+  createdAt: string;
+
+  @Column({ name: 'updated_at' })
+  updatedAt: string;
 }

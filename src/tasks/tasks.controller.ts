@@ -5,17 +5,19 @@ import {
   Body,
   UsePipes,
   ValidationPipe,
+  Query,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { TaskStatus } from './tasks.model';
 
 @Controller('tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Get()
-  getAllTasks() {
-    return this.tasksService.getAllTasks();
+  getAllTasks(@Query('status') status: TaskStatus) {
+    return this.tasksService.getTasks(status);
   }
 
   @Post()
