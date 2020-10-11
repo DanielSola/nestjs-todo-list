@@ -5,11 +5,11 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { TaskStatus, TaskPriority } from '../tasks.model';
 import { MoreThan, LessThan } from 'typeorm';
 import * as dayjs from 'dayjs';
+const tk = require('timekeeper');
 
 describe('TasksService', () => {
   let tasksService: TasksService;
   //Freeze time for testing time-dependant stuff
-  const tk = require('timekeeper');
   const time = new Date(1330688329321);
   tk.freeze(time);
 

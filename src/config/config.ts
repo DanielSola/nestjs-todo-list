@@ -2,7 +2,7 @@ import { registerAs } from '@nestjs/config';
 import { Task } from '../tasks/task.entity';
 
 export const databaseConfig = registerAs('database', () => ({
-  type: 'postgres' as 'postgres',
+  type: 'postgres' as const,
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
   username: process.env.DB_USER,
